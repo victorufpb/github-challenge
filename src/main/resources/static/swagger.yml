@@ -1,0 +1,97 @@
+openapi: 3.0.3
+info:
+  title: Github challenge swagger
+  description: |-
+    Project built to complete a github challenge
+  contact:
+    name: Victor Hugo
+    email: victor.hugo.ufpb@gmail.com
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:9092
+    description: dev
+tags:
+  - name: Github
+    description: Everything about the github repository
+paths:
+  /users/{username}/repos:
+    get:
+      tags:
+        - Github
+      summary: Get repository info
+      description: Get information about the repository and branches from a username
+      operationId: getRepositoryInfo
+      parameters:
+#        - name: Accept
+#          in: header
+#          schema:
+#            type: String
+#            example: application/xml
+        - name: username
+          in: path
+          description: user login
+          required: true
+          schema:
+            type: string
+            example: victorufpb
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryInfo'
+        '404':
+          description: Repository not found
+        '406':
+          description: Repository not found
+      security:
+        - BasicAuth: [ ]
+components:
+  schemas:
+    RepositoryInfo:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserRepositoryInfo'
+    ErrorResponse:
+      required:
+        - status
+        - Message
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 404
+        Message:
+          type: string
+          example: Repository xpto123 not found
+    BranchInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: myBranchName
+        commit_sha:
+          type: string
+          example: c827e59b53054bffcfe10faee915a0aaebacf6e9
+    UserRepositoryInfo:
+      type: object
+      properties:
+        repository_name:
+          type: string
+          example: my_repository
+        owner_login:
+          type: string
+          example: victorufpb
+        branches_info:
+          type: array
+          description: list of branches and its last commit sha
+          items:
+            $ref: '#/components/schemas/BranchInfo'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
