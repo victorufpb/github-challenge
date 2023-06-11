@@ -1,11 +1,13 @@
 package com.challenge.github.application.exception
 
 import com.challenge.github.domain.exception.DefaultException
-import com.challenge.github.domain.exception.NotFoundException
 import org.openapitools.model.ErrorResponseDto
-import org.springframework.context.annotation.Primary
+import org.springframework.http.HttpHeaders.CONTENT_TYPE
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
+import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.http.ResponseEntity
+import org.springframework.web.HttpMediaTypeNotAcceptableException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 
@@ -21,6 +23,20 @@ class ExceptionHandler {
                     message = defaultException.message
             )
         )
+    }
+
+    @ExceptionHandler(value = [HttpMediaTypeNotAcceptableException::class])
+    fun handleHttpMediaException(ex: HttpMediaTypeNotAcceptableException): ResponseEntity<ErrorResponseDto> {
+        println("Handling with ${ex.javaClass}")
+        return ResponseEntity
+                .status(HttpStatus.NOT_ACCEPTABLE)
+                .header(CONTENT_TYPE, APPLICATION_JSON.toString())
+                .body(
+                        ErrorResponseDto(
+                                status = HttpStatus.NOT_ACCEPTABLE.value(),
+                                message = "acceptable MIME type $APPLICATION_JSON"
+                        )
+                )
     }
 
     @ExceptionHandler(value = [Exception::class])

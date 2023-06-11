@@ -6,7 +6,7 @@ import com.challenge.github.domain.entity.UsernameRepositoryInformation
 import com.challenge.github.domain.exception.EmptyRepositoryException
 import com.challenge.github.domain.exception.NotFoundException
 import com.challenge.github.resource.gateway.github.GithubGateway
-import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.stereotype.Service
 import org.springframework.web.client.HttpClientErrorException
 
@@ -32,15 +32,18 @@ class GithubService(
         val repositories = try {
             githubGateway.getRepositories(username)
         } catch (ex: HttpClientErrorException) {
-            if(ex.statusCode == HttpStatus.NOT_FOUND){
+            if(ex.statusCode == NOT_FOUND) {
                 throw NotFoundException(message = "Username $username not found")
-            } else{
+            } else {
                 throw ex
             }
 
         }
 
-        if(repositories.isNullOrEmpty()) throw EmptyRepositoryException(message = "Username $username there is no public repository or is empty")
+        if(repositories.isNullOrEmpty()) {
+            throw EmptyRepositoryException(message = "Username $username there is no public repository or is empty")
+        }
+
         return repositories.map { it.toDomain() }
     }
 
@@ -55,4 +58,8 @@ class GithubService(
             ownerLogin = repository.ownerLogin,
             branchesInformation = branches
     )
+
+    companion object {
+        private const val XML_HEADER = "application/xml"
+    }
 }

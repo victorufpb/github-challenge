@@ -1,3 +1,4 @@
+---
 openapi: 3.0.3
 info:
   title: Github challenge swagger
@@ -25,11 +26,6 @@ paths:
       description: Get information about the repository and branches from a username
       operationId: getRepositoryInfo
       parameters:
-#        - name: Accept
-#          in: header
-#          schema:
-#            type: String
-#            example: application/xml
         - name: username
           in: path
           description: user login
@@ -46,8 +42,22 @@ paths:
                 $ref: '#/components/schemas/RepositoryInfo'
         '404':
           description: Repository not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '406':
-          description: Repository not found
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '412':
+          description: Pre condition failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
       security:
         - BasicAuth: [ ]
 components:
@@ -64,10 +74,11 @@ components:
       properties:
         status:
           type: integer
-          example: 404
+          format: int32
+          example: 123
         Message:
           type: string
-          example: Repository xpto123 not found
+          example: Error message
     BranchInfo:
       type: object
       properties:
