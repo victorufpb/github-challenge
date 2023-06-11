@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate
 import org.springframework.web.client.exchange
 
 @Component
-class GithubImpl(
+class GithubGatewayImpl(
         private val githubProperties: GithubProperties,
         private val restTemplate: RestTemplate
 ): GithubGateway {

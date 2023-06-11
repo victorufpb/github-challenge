@@ -58,8 +58,4 @@ class GithubService(
             ownerLogin = repository.ownerLogin,
             branchesInformation = branches
     )
-
-    companion object {
-        private const val XML_HEADER = "application/xml"
-    }
 }
