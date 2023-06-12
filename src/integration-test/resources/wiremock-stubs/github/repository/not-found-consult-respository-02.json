@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/users/userNotFound/repos"
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "Content-type": "application/json"
+    },
+    "jsonBody": {
+      "message": "Not Found",
+      "documentation_url": "https://docs.github.com/rest/reference/repos#list-repositories-for-a-user"
+    }
+  }
+}

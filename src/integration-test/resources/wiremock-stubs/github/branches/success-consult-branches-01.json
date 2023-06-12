@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/repos/githubSuccess/test-repository/branches"
+  },
+  "response": {
+    "headers": {
+      "Content-type": "application/json"
+    },
+    "jsonBody": [
+      {
+        "name": "develop",
+        "commit": {
+          "sha": "c827e59b53054bffcfe10faee915a0aaebacf6e9",
+          "url": "https://api.github.com/repos/githubSuccess/test-repository/commits/c827e59b53054bffcfe10faee915a0aaebacf6e9"
+        },
+        "protected": false
+      },
+      {
+        "name": "main",
+        "commit": {
+          "sha": "c827e59b53054bffcfe10faee915a0aaebacf6e9",
+          "url": "https://api.github.com/repos/githubSuccess/test-repository/commits/c827e59b53054bffcfe10faee915a0aaebacf6e9"
+        },
+        "protected": false
+      }
+    ]
+  }
+}

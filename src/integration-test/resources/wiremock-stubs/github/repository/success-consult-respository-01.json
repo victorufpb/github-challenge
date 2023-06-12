@@ -1,0 +1,73 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/users/githubSuccess/repos"
+  },
+  "response": {
+    "headers": {
+      "Content-type": "application/json"
+    },
+    "jsonBody": [
+      {
+        "id": 650617165,
+        "node_id": "R_kgDOJsehTQ",
+        "name": "test-repository",
+        "full_name": "githubSuccess/test-repository",
+        "private": false,
+        "owner": {
+          "login": "githubSuccess",
+          "id": 6413972,
+          "node_id": "MDQ6VXNlcjY0MTM5NzI=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/6413972?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/githubSuccess",
+          "html_url": "https://github.com/githubSuccess",
+          "followers_url": "https://api.github.com/users/githubSuccess/followers",
+          "type": "User",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/githubSuccess/test-repository",
+        "description": "created for test",
+        "fork": false,
+        "url": "https://api.github.com/repos/githubSuccess/test-repository",
+        "forks_url": "https://api.github.com/repos/githubSuccess/test-repository/forks",
+        "keys_url": "https://api.github.com/repos/githubSuccess/test-repository/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/githubSuccess/test-repository/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/githubSuccess/test-repository/teams",
+        "created_at": "2023-06-07T12:52:05Z",
+        "updated_at": "2023-06-07T12:52:06Z",
+        "pushed_at": "2023-06-07T13:00:54Z",
+        "git_url": "git://github.com/githubSuccess/test-repository.git",
+        "ssh_url": "git@github.com:githubSuccess/test-repository.git",
+        "clone_url": "https://github.com/githubSuccess/test-repository.git",
+        "svn_url": "https://github.com/githubSuccess/test-repository",
+        "homepage": null,
+        "size": 2,
+        "stargazers_count": 0,
+        "watchers_count": 0,
+        "language": null,
+        "has_issues": true,
+        "has_projects": true,
+        "has_downloads": true,
+        "has_wiki": true,
+        "has_pages": false,
+        "has_discussions": false,
+        "forks_count": 0,
+        "mirror_url": null,
+        "archived": false,
+        "disabled": false,
+        "open_issues_count": 0,
+        "license": null,
+        "allow_forking": true,
+        "is_template": false,
+        "web_commit_signoff_required": false,
+        "topics": [],
+        "visibility": "public",
+        "forks": 0,
+        "open_issues": 0,
+        "watchers": 0,
+        "default_branch": "main"
+      }
+    ]
+  }
+}
