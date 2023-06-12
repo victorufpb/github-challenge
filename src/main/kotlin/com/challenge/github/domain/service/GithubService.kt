@@ -12,7 +12,7 @@ import org.springframework.web.client.HttpClientErrorException
 
 @Service
 class GithubService(
-        private val githubGateway: GithubGateway
+    private val githubGateway: GithubGateway
 ) {
 
     fun getGithubInformationFromUsername(username: String): List<UsernameRepositoryInformation> {
@@ -30,7 +30,9 @@ class GithubService(
     private fun getRepositories(username: String): List<Repository> {
         println("Finding repositories from $username")
         val repositories = try {
-            githubGateway.getRepositories(username)
+            githubGateway.getRepositories(username)?.also {
+                println("Found ${it.size} repositories for $username")
+            }
         } catch (ex: HttpClientErrorException) {
             if(ex.statusCode == NOT_FOUND) {
                 throw NotFoundException(message = "Username $username not found")
@@ -41,6 +43,7 @@ class GithubService(
         }
 
         if(repositories.isNullOrEmpty()) {
+            println("There are no public repositories or user $username does not have any repository")
             throw EmptyRepositoryException(message = "Username $username there is no public repository or is empty")
         }
 
@@ -49,13 +52,17 @@ class GithubService(
 
     private fun getBranchesInfoFromRepository(owner: String, repository: String): List<Branch> {
         println("Finding branches of $owner from repository $repository")
-        return githubGateway.getBranchesFromRepository(owner, repository)?.filter { !it.fork }?.map { it.toDomain() }
-                ?: listOf()
+        return githubGateway.getBranchesFromRepository(owner, repository)?.filter {
+            !it.fork
+        }?.map {
+            it.toDomain()
+        }
+            ?: listOf()
     }
 
     private fun buildUserInformation(repository: Repository, branches: List<Branch>) = UsernameRepositoryInformation(
-            repositoryName = repository.name,
-            ownerLogin = repository.ownerLogin,
-            branchesInformation = branches
+        repositoryName = repository.name,
+        ownerLogin = repository.ownerLogin,
+        branchesInformation = branches
     )
 }
