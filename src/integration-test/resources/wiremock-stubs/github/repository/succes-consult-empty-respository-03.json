@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/users/emptyUser/repos"
+  },
+  "response": {
+    "headers": {
+      "Content-type": "application/json"
+    },
+    "jsonBody": []
+  }
+}

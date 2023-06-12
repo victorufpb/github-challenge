@@ -52,4 +52,18 @@ class ChallengeControllerIntegrationTest : IntegrationTestConfiguration() {
             statusCode(HttpStatus.NOT_ACCEPTABLE.value())
         }
     }
+
+    @Test
+    fun `given an invalid accept header, when try to get information, should get pre condition failed`() {
+        val username = "emptyUser"
+        Given {
+            headers(basicAuthHeader)
+
+        } When {
+            get("/users/$username/repos")
+        } Then {
+            log().all()
+            statusCode(HttpStatus.PRECONDITION_FAILED.value())
+        }
+    }
 }
